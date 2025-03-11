@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Data of sensor</title>
 </head>
 <body>
 <p th:text="${sensor.getId()}"> ID </p>
@@ -10,5 +10,11 @@
 <p th:text="${sensor.getMetric()}"> Metric </p>
 <p th:text="${sensor.getValue()}"> Value </p>
 <p th:text="${sensor.getLocalDateTime()}"> LocalDateTime </p>
+
+<a th:href="@{/sensors/{id}/edit(id = ${sensor.getId()})}"> Edit </a>
+
+<form th:method="DELETE" th:action="@{/sensors/{id}(id = ${sensor.getId()})}">
+    <input type = "submit" value = "Delete"/>
+</form>
 </body>
 </html>

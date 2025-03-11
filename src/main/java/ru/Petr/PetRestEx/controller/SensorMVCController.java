@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +36,7 @@ public class SensorMVCController {
     public String allSensors(Model model) {
         List<Sensor> sensors = sensorService.getAllSensors();
         model.addAttribute("sensors", sensors);
-        return "list-sensors";
+        return "sensors/list-sensors";
     }
 
     @GetMapping("/{id}")
@@ -42,7 +44,7 @@ public class SensorMVCController {
         Optional <Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
         if (sensorById.isPresent()) {
             model.addAttribute("sensor", sensorById.get());
-            return "sensor";
+            return "sensors/sensor";
         } else {
             return "redirect:/list-sensors";
         }
@@ -51,47 +53,47 @@ public class SensorMVCController {
     @GetMapping("/new")
     public String createNewSensorForm(@ModelAttribute("sensor") Sensor sensor) {
 
-        return "create-sensor";
+        return "sensors/create-sensor";
     }
 
     @PostMapping
     public String createSensor(@ModelAttribute("sensor") @Valid Sensor sensor,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "create-sensor";
+            return "sensors/create-sensor";
         }
 
         sensorService.createSensor(sensor);
         return "redirect:/list-sensors";
     }
 
-    @GetMapping("/edit")
-    public String editSensorForm(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/{id}/edit")
+    public String editSensorForm(@PathVariable("id") Long id, Model model) {
         Optional <Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
 
         if (sensorById.isPresent()) {
             model.addAttribute("sensor", sensorById.get());
-            return "edit-sensor";
+            return "sensors/edit-sensor";
         } else {
-            return "redirect:/sensor";
+            return "redirect:/sensors";
         }
     }
 
-    @PostMapping("/edit")
-    public String editSensor(@ModelAttribute("sensor") @Valid Sensor sensor,
+    @PatchMapping("/{id}")
+    public String editSensor(@ModelAttribute("sensor") @Valid Sensor sensor, @PathVariable("id") Long id,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "edit-sensor";
+            return "sensors/edit-sensor";
         }
 
-        sensorService.updateSensor(sensor.getId(), sensor);
-        return "redirect:/sensor";
+        sensorService.updateSensor(id, sensor);
+        return "redirect:/sensors";
     }
 
-    @PostMapping("/delete")
-    public String deleteSensor(@RequestParam("id") Long id) {
+    @DeleteMapping("/{id}")
+    public String deleteSensor(@PathVariable("id") Long id) {
         sensorService.deleteSensor(id);
-        return "redirect:/sensor";
+        return "redirect:/sensors";
     }
 
 

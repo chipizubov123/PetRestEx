@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each = "workshop1 : ${workshops}">
+    <a th:href = "@{/workshops/{id} (id = ${workshop1.getId()})}" th:text = "${workshop1.getId()}">ID</a>
+    <a th:text = "${workshop1.getName()()}">Name</a>
+    <a th:text = "${workshop1.getSensorList()}">Sensors</a>
+</div>
+
+</body>
+</html>

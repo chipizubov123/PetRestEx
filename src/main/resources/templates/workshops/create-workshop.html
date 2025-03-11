@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Creation page</title>
+</head>
+<body>
+
+<form th:method = "POST" th:action = "@{/templates/workshops}" th:object="${workshop}">
+
+    <!--    <label for="metric">Metric: </label>-->
+    <!--    <input type="text" th:field="*{metric}" id="metric"/>-->
+    <!--    <div style="color:red" th:if="${#fields.hasErrors('metric')}" th:errors="*{metric}">Metric Errors</div>-->
+    <!--    <br/>-->
+    <label for="name">Name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Errors</div>
+    <br/>
+
+    <input type="submit" value ="Add new workshop">
+</form>
+
+</body>
+</html>

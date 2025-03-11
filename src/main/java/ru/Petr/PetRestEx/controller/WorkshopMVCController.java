@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.Petr.PetRestEx.model.Sensor;
 import ru.Petr.PetRestEx.model.Workshop;
 import ru.Petr.PetRestEx.service.WorkshopService;
 
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/workshop")
+@RequestMapping("/workshops")
 public class WorkshopMVCController {
 
     private final WorkshopService workshopService;
@@ -32,66 +31,66 @@ public class WorkshopMVCController {
 
 
     @GetMapping
-    public String allSensors(Model model) {
+    public String allWorkshops(Model model) {
         List<Workshop> workshops = workshopService.getAllWorkshop();
-        model.addAttribute("workshop", workshops);
-        return "list-sensors";
+        model.addAttribute("workshops", workshops);
+        return "workshops/list-workshops";
     }
 
     @GetMapping("/{id}")
-    public String getOneSensor(@PathVariable("id") Long id, Model model) {
-        Optional<Sensor> sensorById = Optional.ofNullable(workshopService.getSensorById(id));
-        if (sensorById.isPresent()) {
-            model.addAttribute("sensor", sensorById.get());
-            return "sensor";
+    public String getOneWorkshop(@PathVariable("id") Long id, Model model) {
+        Optional<Workshop> workshopById = Optional.ofNullable(workshopService.getWorkshopById(id));
+        if (workshopById.isPresent()) {
+            model.addAttribute("workshop", workshopById.get());
+            return "workshops/workshop";
         } else {
-            return "redirect:/list-sensors";
+            return "redirect:/list-workshops";
         }
     }
 
     @GetMapping("/new")
-    public String createNewSensorForm(@ModelAttribute("sensor") Sensor sensor) {
+    public String createNewWorkshopForm(@ModelAttribute("workshop") Workshop workshop) {
 
-        return "create-sensor";
+        return "workshops/create-workshop";
     }
 
     @PostMapping
-    public String createSensor(@ModelAttribute("sensor") @Valid Sensor sensor,
-                               BindingResult bindingResult) {
+    public String createWorkshop(@ModelAttribute("workshop") @Valid Workshop workshop,
+                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "create-sensor";
+            return "workshops/create-workshop";
         }
 
-        sensorService.createSensor(sensor);
-        return "redirect:/list-sensors";
+        workshopService.createWorkshop(workshop);
+        return "redirect:/list-workshops";
     }
 
     @GetMapping("/edit")
-    public String editSensorForm(@RequestParam("id") Long id, Model model) {
-        Optional <Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
+    public String editWorkshopForm(@RequestParam("id") Long id, Model model) {
+        Optional<Workshop> workshopById = Optional.ofNullable(workshopService.getWorkshopById(id));
 
-        if (sensorById.isPresent()) {
-            model.addAttribute("sensor", sensorById.get());
-            return "edit-sensor";
+        if (workshopById.isPresent()) {
+            model.addAttribute("workshop", workshopById.get());
+            return "workshops/edit-workshop";
         } else {
-            return "redirect:/sensor";
+            return "redirect:/workshop";
         }
     }
 
     @PostMapping("/edit")
-    public String editSensor(@ModelAttribute("sensor") @Valid Sensor sensor,
-                             BindingResult bindingResult) {
+    public String editWorkshop(@ModelAttribute("workshop") @Valid Workshop workshop,
+                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "edit-sensor";
+            return "workshops/edit-workshop";
         }
 
-        sensorService.updateSensor(sensor.getId(), sensor);
-        return "redirect:/sensor";
+        workshopService.updateWorkshop(workshop.getId(), workshop);
+        return "redirect:/workshop";
     }
 
     @PostMapping("/delete")
-    public String deleteSensor(@RequestParam("id") Long id) {
-        sensorService.deleteSensor(id);
-        return "redirect:/sensor";
+    public String deleteWorkshop(@RequestParam("id") Long id) {
+        workshopService.deleteWorkshop(id);
+        return "redirect:/workshop";
     }
 }
