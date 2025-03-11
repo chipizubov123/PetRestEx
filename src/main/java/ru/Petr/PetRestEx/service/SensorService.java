@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.Petr.PetRestEx.model.Sensor;
 import ru.Petr.PetRestEx.repository.SensorRepository;
 
+import java.util.List;
+
 @Service
 public class SensorService {
 
@@ -30,6 +32,10 @@ public class SensorService {
         existingSensor.setLocalDateTime(updatedSensor.getLocalDateTime());
 
         return sensorRepository.save(existingSensor);
+    }
+
+    public List<Sensor> getAllSensors() {
+        return sensorRepository.findAll();
     }
 
     public void deleteSensor(Long id) {

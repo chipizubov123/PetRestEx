@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +38,7 @@ public class Sensor {
     @Min(value = 40)
     private double value;
 
-
+    @DateTimeFormat
     private LocalDateTime localDateTime;
 
 }

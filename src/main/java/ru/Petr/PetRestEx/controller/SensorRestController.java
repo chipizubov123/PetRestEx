@@ -10,34 +10,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.Petr.PetRestEx.model.Inspector;
-import ru.Petr.PetRestEx.service.InspectorService;
-//
+import ru.Petr.PetRestEx.model.Sensor;
+import ru.Petr.PetRestEx.service.SensorService;
+
 //@RestController
-//@RequestMapping("/api/inspectors")
-//public class InspectorController {
+//@RequestMapping("/api/inspectors/workshops/sensors")
+//public class SensorRestController {
+//
 //    @Autowired
-//    private InspectorService inspectorService;
+//    private SensorService sensorService;
 //
 //    @PostMapping
-//    public Inspector createInspector(@RequestBody Inspector inspector) {
-//        return inspectorService.createInspector(inspector);
+//    public Sensor createSensor(@RequestBody Sensor sensor) {
+//        return sensorService.createSensor(sensor);
 //    }
 //
 //    @GetMapping("/{id}")
-//    public Inspector getInspectorById(@PathVariable Long id) {
-//        return inspectorService.getInspectorById(id);
+//    public Sensor getSensorById(@PathVariable Long id) {
+//        return sensorService.getSensorById(id);
 //    }
 //
 //    @PutMapping("/{id}")
-//    public Inspector updateInspector(@PathVariable Long id, @RequestBody Inspector inspector) {
-//        return inspectorService.updateInspector(id, inspector);
+//    public Sensor updateSensor(@PathVariable Long id, @RequestBody Sensor sensor) {
+//        return sensorService.updateSensor(id, sensor);
 //    }
 //
 //    @DeleteMapping("/{id}")
-//    public void deleteInspector(@PathVariable Long id) {
-//        inspectorService.deleteInspector(id);
+//    public void deleteSensor(@PathVariable Long id) {
+//        sensorService.deleteSensor(id);
 //    }
-//
-//
 //}

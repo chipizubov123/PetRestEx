@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.Petr.PetRestEx.model.Workshop;
 import ru.Petr.PetRestEx.repository.WorkshopRepository;
 
+import java.util.List;
+
 @Service
 public class WorkshopService {
 
@@ -27,6 +29,10 @@ public class WorkshopService {
         existingWorkshop.setName(updatedWorkshop.getName());
 
         return workshopRepository.save(existingWorkshop);
+    }
+
+    public List<Workshop> getAllWorkshop() {
+        return (List<Workshop>) workshopRepository.findAll();
     }
 
     public void deleteWorkshop(Long id) {

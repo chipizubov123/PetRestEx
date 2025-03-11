@@ -5,4 +5,5 @@ import ru.Petr.PetRestEx.model.Sensor;
 
 public interface SensorRepository extends JpaRepository<Sensor, Long> {
 
+
 }

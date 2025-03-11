@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all sensors</title>
+</head>
+<body>
+<div th:each = "sensor1 : ${sensors}">
+    <a th:href = "@{/sensors/{id} (id = ${sensor1.getId()})}" th:text = "${sensor1.getId()}">ID</a>
+    <a th:text = "${sensor1.getWorkshop()}">Workshop</a>
+    <a th:text = "${sensor1.getMetric()}">Metric</a>
+    <a th:text = "${sensor1.getValue()}">Value</a>
+    <a th:text = "${sensor1.getLocalDateTime()}">LocalDateTime</a>
+</div>
+
+</body>
+</html>
