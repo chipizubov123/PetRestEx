@@ -55,7 +55,7 @@ public class WorkshopMVCController {
     }
 
     @PostMapping
-    public String createWorkshop(@ModelAttribute("workshop") @Valid Workshop workshop,
+    public String createWorkshop(@ModelAttribute("workshop") Workshop workshop,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "workshops/create-workshop";
