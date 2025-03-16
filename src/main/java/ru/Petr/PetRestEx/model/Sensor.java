@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "sensor")
 @RequiredArgsConstructor
 @Getter
 @Setter

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,11 +63,11 @@ public class WorkshopMVCController {
         }
 
         workshopService.createWorkshop(workshop);
-        return "redirect:/list-workshops";
+        return "redirect:/workshops/list-workshops";
     }
 
-    @GetMapping("/edit")
-    public String editWorkshopForm(@RequestParam("id") Long id, Model model) {
+    @GetMapping("/{id}/edit")
+    public String editWorkshopForm(@PathVariable("id") Long id, Model model) {
         Optional<Workshop> workshopById = Optional.ofNullable(workshopService.getWorkshopById(id));
 
         if (workshopById.isPresent()) {
@@ -77,14 +78,14 @@ public class WorkshopMVCController {
         }
     }
 
-    @PostMapping("/edit")
-    public String editWorkshop(@ModelAttribute("workshop") @Valid Workshop workshop,
+    @PatchMapping("/{id}")
+    public String editWorkshop(@ModelAttribute("workshop") Workshop workshop, @PathVariable("id") Long id,
                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "workshops/edit-workshop";
         }
 
-        workshopService.updateWorkshop(workshop.getId(), workshop);
+        workshopService.updateWorkshop(id, workshop);
         return "redirect:/workshop";
     }
 

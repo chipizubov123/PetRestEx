@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.Petr.PetRestEx.model.Sensor;
 import ru.Petr.PetRestEx.service.SensorService;
+import ru.Petr.PetRestEx.service.WorkshopService;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +27,13 @@ public class SensorMVCController {
 
     private final SensorService sensorService;
 
+    private final WorkshopService workshopService;
+
 
     @Autowired
-    public SensorMVCController(SensorService sensorService) {
+    public SensorMVCController(SensorService sensorService, WorkshopService workshopService) {
         this.sensorService = sensorService;
+        this.workshopService = workshopService;
     }
 
     @GetMapping
@@ -57,7 +61,7 @@ public class SensorMVCController {
     }
 
     @PostMapping
-    public String createSensor(@ModelAttribute("sensor") @Valid Sensor sensor,
+    public String createSensor(@ModelAttribute("sensor") Sensor sensor,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "sensors/create-sensor";
@@ -73,6 +77,7 @@ public class SensorMVCController {
 
         if (sensorById.isPresent()) {
             model.addAttribute("sensor", sensorById.get());
+            model.addAttribute("workshops", workshopService.getAllWorkshop());
             return "sensors/edit-sensor";
         } else {
             return "redirect:/sensors";
