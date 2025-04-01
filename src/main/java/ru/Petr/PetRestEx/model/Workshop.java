@@ -22,9 +22,12 @@ public class Workshop {
     private Long id;
 
     @OneToMany
-    private List <Sensor> sensorList;
+    private List<Sensor> sensorList;
 
     private String name;
 
-
+    @Override
+    public String toString() {
+        return "Workshop " + name;
+    }
 }

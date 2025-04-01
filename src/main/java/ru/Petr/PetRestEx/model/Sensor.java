@@ -13,9 +13,6 @@ import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 @Entity(name = "sensor")
 @RequiredArgsConstructor
@@ -38,9 +35,19 @@ public class Sensor {
     @Min(value = 40)
     private double value;
 
-    @DateTimeFormat
-    private LocalDateTime localDateTime;
+//    @DateTimeFormat
+//    private LocalDateTime localDateTime;
 
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+               "id=" + id +
+               ", workshop=" + workshop.getName() +
+               ", metric='" + metric + '\'' +
+               ", value=" + value +
+               '}';
+    }
 }
 
 

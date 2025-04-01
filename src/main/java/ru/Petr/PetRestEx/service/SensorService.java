@@ -29,7 +29,7 @@ public class SensorService {
 
         existingSensor.setMetric(updatedSensor.getMetric());
         existingSensor.setValue(updatedSensor.getValue());
-        existingSensor.setLocalDateTime(updatedSensor.getLocalDateTime());
+//        existingSensor.setLocalDateTime(updatedSensor.getLocalDateTime());
 
         return sensorRepository.save(existingSensor);
     }

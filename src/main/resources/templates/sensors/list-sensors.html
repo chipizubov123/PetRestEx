@@ -5,19 +5,42 @@
     <title>List of all sensors</title>
 </head>
 <body>
-<div th:each = "sensor1 : ${sensors}">
-    <a th:href = "@{/sensors/{id} (id = ${sensor1.getId()})}" th:text = "${sensor1.getId()}">ID</a>
-    <a th:text = "${sensor1.getWorkshop()}">Workshop</a>
-    <a th:text = "${sensor1.getMetric()}">Metric</a>
-    <a th:text = "${sensor1.getValue()}">Value</a>
-    <a th:text = "${sensor1.getLocalDateTime()}">LocalDateTime</a>
-
-
+<div>
+    <table th:border="1">
+        <tr>
+            <th>ID</th>
+            <th>Workshop</th>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    <tr th:each = "sensor1 : ${sensors}">
+    <td th:href = "@{/sensors/{id} (id = ${sensor1.getId()})}" th:text = "${sensor1.getId()}">ID</td>
+    <td th:text = "${sensor1.getWorkshop()}">Workshop</td>
+    <td th:text = "${sensor1.getMetric()}">Metric</td>
+    <td th:text = "${sensor1.getValue()}">Value</td>
+<!--    <a th:text = "${sensor1.getLocalDateTime()}">LocalDateTime</a>-->
+        <td>
+            <form th:action="@{/sensors/{id}/edit(id=${sensor1.id})}" th:object="${sensor1}">
+                <button style="background: #78e1cc" type="submit">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/sensors/{id}/delete(id=${sensor1.id})}">
+                <input type="hidden" name="id" th:value="${sensor1.id}">
+                <button style="background: #97e4ce" type="submit" value="Delete">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </table>
+    <br>
 
 </div>
 <br/>
 <hr/>
-<a th:href="/sensors/new">Create new sensor</a>
+<form th:action="@{/sensors/new}">
+    <button style="background: #6dbfa7" type="submit">Add new Sensor</button>
+</form>
+<br>
 
 </body>
 </html>

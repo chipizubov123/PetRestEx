@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.Petr.PetRestEx.model.Sensor;
 import ru.Petr.PetRestEx.service.SensorService;
 import ru.Petr.PetRestEx.service.WorkshopService;
@@ -55,15 +54,17 @@ public class SensorMVCController {
     }
 
     @GetMapping("/new")
-    public String createNewSensorForm(@ModelAttribute("sensor") Sensor sensor) {
-
+    public String createNewSensorForm(@ModelAttribute("sensor") Sensor sensor, Model model) {
+        model.addAttribute("workshops", workshopService.getAllWorkshop());
         return "sensors/create-sensor";
     }
 
     @PostMapping
     public String createSensor(@ModelAttribute("sensor") Sensor sensor,
-                             BindingResult bindingResult) {
+                             BindingResult bindingResult, Model model) {
+        model.addAttribute("workshops", workshopService.getAllWorkshop());
         if (bindingResult.hasErrors()) {
+
             return "sensors/create-sensor";
         }
 

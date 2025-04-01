@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method = "POST" th:action = "@{/sensors}" th:object="${sensor}">
+<form th:method="POST" th:action="@{/sensors}" th:object="${sensor}">
     <p>
         <label>
             <select size="3" multiple="multiple" name="metric" id="metric">
@@ -17,35 +17,22 @@
             </select>
         </label>
     </p>
-<!--    <label for="metric">Metric: </label>-->
-<!--    <input type="text" th:field="*{metric}" id="metric"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('metric')}" th:errors="*{metric}">Metric Errors</div>-->
-<!--    <br/>-->
+
     <label for="value">Value: </label>
     <input type="text" th:field="*{value}" id="value"/>
     <div style="color:red" th:if="${#fields.hasErrors('value')}" th:errors="*{value}">Value Errors</div>
     <br/>
-    <label for="localDateTime">localDateTime: </label>
-    <input type="text" th:field="*{localDateTime}" id="localDateTime"/>
-    <div style="color:red" th:if="${#fields.hasErrors('localDateTime')}" th:errors="*{localDateTime}">Password Errors</div>
-    <br/>
+
+
     <p>
-<!--    <div th:each="workshop : ${workshops}">-->
-<!--        <label>-->
-<!--            <input type="radio" name="workshop" th:value="${workshop}" />-->
-<!--            <span th:text="${workshop}">Workshop Name</span>-->
-<!--        </label>-->
-<!--    </div>-->
-        <label>
-            <select size="" multiple="multiple" name="workshop" id="workshop" >
-                <option disabled>Workshop:</option>
-                <option value="1">Workshop 1</option>
-                <option value="2">Workshop 2</option>
-                <option value="3">Workshop 3</option>
-            </select>
-        </label>
+        Workshop:<br/>
+        <select name="selected" multiple size="4">
+            <option disabled>Workshop:</option>
+            <option th:each="workshop : ${workshops}" th:value="${workshop.id}" th:text="${workshop.name}"></option>
+        </select>
+
     </p>
-    <input type="submit" value ="Add new sensor">
+    <input type="submit" value="Add new sensor">
 </form>
 
 </body>
