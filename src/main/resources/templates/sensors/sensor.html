@@ -2,15 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Data of sensor</title>
+    <title>View Sensor Details</title>
 </head>
 <body>
-<p th:text="${sensor.getId()}"> ID </p>
-<p th:text="${sensor.getWorkshop()}"> Workshop </p>
-<p th:text="${sensor.getMetric()}"> Metric </p>
-<p th:text="${sensor.getValue()}"> Value </p>
-<!--<p th:text="${sensor.getLocalDateTime()}"> LocalDateTime </p>-->
 
+<h1>Sensor Details</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Workshop</th>
+        <th>Metric</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${sensor}">
+        <td th:text="${sensor.id}">ID</td>
+        <td th:text="${sensor.workshop}">Workshop</td>
+        <td th:text="${sensor.metric}">Metric</td>
+        <td th:text="${sensor.value}">Value</td>
+    </tr>
+    </tbody>
+</table>
 <a th:href="@{/sensors/{id}/edit(id = ${sensor.getId()})}"> Edit </a>
 
 <form th:method="DELETE" th:action="@{/sensors/{id}(id = ${sensor.getId()})}">

@@ -5,6 +5,7 @@
     <title>All Workshops</title>
 </head>
 <body>
+<h1>List of all workshops</h1>
 <div>
     <table th:border="1">
         <tr>
@@ -15,16 +16,26 @@
 
 
         <tr th:each="workshop1 : ${workshops}">
-            <td th:href="@{/workshops/{id} (id = ${workshop1.getId()})}" th:text="${workshop1.getId()}">ID</td>
+            <td th:href="@{/workshops/{id}(id=${workshop1.id})}">
+                <a th:href="@{/workshops/{id}(id=${workshop1.id})}">[[${workshop1.id}]]</a>
+            </td>
+
             <td th:text="${workshop1.getName()}">Name</td>
-            <td th:text="${workshop1.getSensorList()}">Sensors</td>
+            <td>
+                <ul th:unless="${#lists.isEmpty(workshop1.sensorList)}">
+                    <li th:each="sensor : ${workshop1.sensorList}">
+                        <a th:href="@{/sensors/{id}(id=${sensor.id})}">[[${sensor.id}]]</a>
+                    </li>
+                </ul>
+                <span th:if="${#lists.isEmpty(workshop1.sensorList)}">No Sensors</span>
+            </td>
             <td>
                 <form th:action="@{/workshops/{id}/edit(id=${workshop1.id})}" th:object="${workshop1}">
                     <button style="background: #78e1cc" type="submit">Edit</button>
                 </form>
             </td>
             <td>
-                <form th:method="DELETE" th:action="@{/workshops/{id}/delete(id=${workshop1.id})}">
+                <form th:method="DELETE" th:action="@{/workshops/{id}(id=${workshop1.id})}">
                     <input type="hidden" name="id" th:value="${workshop1.id}">
                     <button style="background: #97e4ce" type="submit" value="Delete">Delete</button>
                 </form>

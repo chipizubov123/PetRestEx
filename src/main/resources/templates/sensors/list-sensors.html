@@ -25,7 +25,7 @@
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/sensors/{id}/delete(id=${sensor1.id})}">
+            <form th:method="DELETE" th:action="@{/sensors/{id}(id=${sensor1.id})}">
                 <input type="hidden" name="id" th:value="${sensor1.id}">
                 <button style="background: #97e4ce" type="submit" value="Delete">Delete</button>
             </form>

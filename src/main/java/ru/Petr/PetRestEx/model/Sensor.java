@@ -25,7 +25,7 @@ public class Sensor {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Workshop_id", nullable = false)
+    @JoinColumn(name = "workshop_id", nullable = false)
     private Workshop workshop;
 
 
@@ -34,9 +34,6 @@ public class Sensor {
     @Max(value = 150)
     @Min(value = 40)
     private double value;
-
-//    @DateTimeFormat
-//    private LocalDateTime localDateTime;
 
 
     @Override

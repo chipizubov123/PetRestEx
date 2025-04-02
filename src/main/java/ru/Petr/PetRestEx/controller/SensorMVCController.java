@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.Petr.PetRestEx.model.Sensor;
 import ru.Petr.PetRestEx.service.SensorService;
 import ru.Petr.PetRestEx.service.WorkshopService;
@@ -60,16 +61,16 @@ public class SensorMVCController {
     }
 
     @PostMapping
-    public String createSensor(@ModelAttribute("sensor") Sensor sensor,
+    public String createSensor(@ModelAttribute("sensor") Sensor sensor, @RequestParam(name = "selected") Long id,
                              BindingResult bindingResult, Model model) {
         model.addAttribute("workshops", workshopService.getAllWorkshop());
         if (bindingResult.hasErrors()) {
 
             return "sensors/create-sensor";
         }
-
+        sensor.setWorkshop(workshopService.getWorkshopById(id));
         sensorService.createSensor(sensor);
-        return "redirect:/list-sensors";
+        return "redirect:/sensors";
     }
 
     @GetMapping("/{id}/edit")

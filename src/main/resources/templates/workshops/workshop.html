@@ -1,14 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Data of workshop</title>
+    <title>View Workshop Details</title>
 </head>
 <body>
 
-<p th:text="${workshop.getId()}"> ID </p>
-<p th:text="${workshop.getName()}"> Name </p>
-<p th:text="${workshop.getSensorList()}"> Sensors </p>
+<h1>Workshop Details</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${workshop}">
+        <td th:text="${workshop.id}">ID</td>
+        <td th:text="${workshop.name}">Name</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Sensors</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Metric</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sensor : ${workshop.getSensorList()}">
+        <td th:text="${sensor.id}">ID</td>
+        <td th:text="${sensor.metric}">Metric</td>
+        <td th:text="${sensor.value}">Value</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

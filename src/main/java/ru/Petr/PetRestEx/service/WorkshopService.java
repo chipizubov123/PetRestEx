@@ -32,7 +32,9 @@ public class WorkshopService {
     }
 
     public List<Workshop> getAllWorkshop() {
-        return (List<Workshop>) workshopRepository.findAll();
+        List <Workshop> workshops = (List<Workshop>) workshopRepository.findAll();
+        workshops.forEach(w -> w.getSensorList().size());
+        return workshops;
     }
 
     public void deleteWorkshop(Long id) {
