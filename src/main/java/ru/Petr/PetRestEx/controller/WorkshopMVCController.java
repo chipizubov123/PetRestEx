@@ -39,7 +39,7 @@ public class WorkshopMVCController {
 
     @GetMapping("/{id}")
     public String getOneWorkshop(@PathVariable("id") Long id, Model model) {
-        Optional<Workshop> workshopById = Optional.ofNullable(workshopService.getWorkshopById(id));
+        Optional<Workshop> workshopById = workshopService.getWorkshopById(id);
         if (workshopById.isPresent()) {
             model.addAttribute("workshop", workshopById.get());
             return "workshops/workshop";
@@ -62,12 +62,12 @@ public class WorkshopMVCController {
         }
 
         workshopService.createWorkshop(workshop);
-        return "redirect:/workshops/list-workshops";
+        return "redirect:/workshops";
     }
 
     @GetMapping("/{id}/edit")
     public String editWorkshopForm(@PathVariable("id") Long id, Model model) {
-        Optional<Workshop> workshopById = Optional.ofNullable(workshopService.getWorkshopById(id));
+        Optional<Workshop> workshopById = workshopService.getWorkshopById(id);
 
         if (workshopById.isPresent()) {
             model.addAttribute("workshop", workshopById.get());

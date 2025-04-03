@@ -26,9 +26,9 @@
     </tr>
     </tbody>
 </table>
-<a th:href="@{/sensors/{id}/edit(id = ${sensor.getId()})}"> Edit </a>
+<a th:href="@{/sensors/{id}/edit(id = ${sensor.id})}"> Edit </a>
 
-<form th:method="DELETE" th:action="@{/sensors/{id}(id = ${sensor.getId()})}">
+<form th:method="DELETE" th:action="@{/sensors/{id}(id = ${sensor.id})}">
     <input type = "submit" value = "Delete"/>
 </form>
 </body>

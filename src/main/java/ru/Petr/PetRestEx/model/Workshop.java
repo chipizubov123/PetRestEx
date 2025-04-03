@@ -1,5 +1,6 @@
 package ru.Petr.PetRestEx.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,10 +24,12 @@ public class Workshop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Sensor> sensorList;
 
     private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Sensor> sensorList;
 
     @Override
     public String toString() {

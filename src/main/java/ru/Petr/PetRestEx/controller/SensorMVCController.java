@@ -1,7 +1,6 @@
 package ru.Petr.PetRestEx.controller;
 
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.Petr.PetRestEx.model.Sensor;
+import ru.Petr.PetRestEx.model.Workshop;
 import ru.Petr.PetRestEx.service.SensorService;
 import ru.Petr.PetRestEx.service.WorkshopService;
 
@@ -45,7 +45,7 @@ public class SensorMVCController {
 
     @GetMapping("/{id}")
     public String getOneSensor(@PathVariable("id") Long id, Model model) {
-        Optional <Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
+        Optional<Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
         if (sensorById.isPresent()) {
             model.addAttribute("sensor", sensorById.get());
             return "sensors/sensor";
@@ -62,20 +62,28 @@ public class SensorMVCController {
 
     @PostMapping
     public String createSensor(@ModelAttribute("sensor") Sensor sensor, @RequestParam(name = "selected") Long id,
-                             BindingResult bindingResult, Model model) {
+                               BindingResult bindingResult, Model model) {
         model.addAttribute("workshops", workshopService.getAllWorkshop());
         if (bindingResult.hasErrors()) {
 
             return "sensors/create-sensor";
         }
-        sensor.setWorkshop(workshopService.getWorkshopById(id));
+        Optional<Workshop> workshopOptional = workshopService.getWorkshopById(id);
+        if (workshopOptional.isPresent()) {
+            sensor.setWorkshop(workshopOptional.get());
+        } else {
+            model.addAttribute("error", "Мастерская не найдена!");
+            return "sensors/create-sensor";
+        }
+
+        // Создаем сенсор
         sensorService.createSensor(sensor);
         return "redirect:/sensors";
     }
 
     @GetMapping("/{id}/edit")
     public String editSensorForm(@PathVariable("id") Long id, Model model) {
-        Optional <Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
+        Optional<Sensor> sensorById = Optional.ofNullable(sensorService.getSensorById(id));
 
         if (sensorById.isPresent()) {
             model.addAttribute("sensor", sensorById.get());
@@ -87,8 +95,8 @@ public class SensorMVCController {
     }
 
     @PatchMapping("/{id}")
-    public String editSensor(@ModelAttribute("sensor") @Valid Sensor sensor, @PathVariable("id") Long id,
-                           BindingResult bindingResult) {
+    public String editSensor(@ModelAttribute("sensor") Sensor sensor, @PathVariable("id") Long id,
+                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "sensors/edit-sensor";
         }

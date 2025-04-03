@@ -14,10 +14,10 @@
             <th>Value</th>
         </tr>
     <tr th:each = "sensor1 : ${sensors}">
-    <td th:href = "@{/sensors/{id} (id = ${sensor1.getId()})}" th:text = "${sensor1.getId()}">ID</td>
-    <td th:text = "${sensor1.getWorkshop()}">Workshop</td>
-    <td th:text = "${sensor1.getMetric()}">Metric</td>
-    <td th:text = "${sensor1.getValue()}">Value</td>
+    <td th:href = "@{/sensors/{id} (id = ${sensor1.id})}" th:text = "${sensor1.id}">ID</td>
+    <td th:text = "${sensor1.workshop}">Workshop</td>
+    <td th:text = "${sensor1.metric}">Metric</td>
+    <td th:text = "${sensor1.value}">Value</td>
 <!--    <a th:text = "${sensor1.getLocalDateTime()}">LocalDateTime</a>-->
         <td>
             <form th:action="@{/sensors/{id}/edit(id=${sensor1.id})}" th:object="${sensor1}">
