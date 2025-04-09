@@ -10,9 +10,12 @@ import java.util.List;
 @Service
 public class SensorService {
 
+    private final SensorRepository sensorRepository;
 
     @Autowired
-    private SensorRepository sensorRepository;
+    public SensorService(SensorRepository sensorRepository) {
+        this.sensorRepository = sensorRepository;
+    }
 
     public Sensor createSensor(Sensor sensor) {
         return sensorRepository.save(sensor);
