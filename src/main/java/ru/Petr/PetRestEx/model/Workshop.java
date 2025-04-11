@@ -17,7 +17,6 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "workshop")
-//@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -28,10 +27,9 @@ public class Workshop implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JsonManagedReference
     private List<Sensor> sensorList;
 

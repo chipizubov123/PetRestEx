@@ -24,14 +24,10 @@ public class SensorRestController {
 
     private final SensorService sensorService;
 
-//    private final SensorMapper sensorMapper;
-
     @Autowired
-    public SensorRestController(SensorService sensorService
-//            , SensorMapper sensorMapper
-    ) {
+    public SensorRestController(SensorService sensorService) {
         this.sensorService = sensorService;
-//        this.sensorMapper = sensorMapper;
+
     }
 
     /**
@@ -42,7 +38,7 @@ public class SensorRestController {
     @GetMapping
     public ResponseEntity<List<Sensor>> getAllSensors() {
         List<Sensor> sensors = sensorService.getAllSensors();
-//        List <SensorDTO> sensorsDTO = sensorMapper.toSensorDTOs(sensors);
+
         return ResponseEntity.ok(sensors);
     }
 
@@ -55,7 +51,7 @@ public class SensorRestController {
     @GetMapping("/{id}")
     public ResponseEntity<Sensor> getSensorById(@PathVariable("id") Long id) {
         Sensor sensor = sensorService.getSensorById(id);
-//        SensorDTO sensorDTO = sensorMapper.toSensorDTO(sensor);
+
         if (sensor == null) {
             return ResponseEntity.notFound().build();
         }
@@ -70,9 +66,7 @@ public class SensorRestController {
      */
     @PostMapping
     public ResponseEntity<Sensor> createSensor(@Valid @RequestBody Sensor sensor) {
-//        Sensor createdSensor = sensorMapper.fromSensorDTO(sensorDTO);
         Sensor savedSensor = sensorService.createSensor(sensor);
-//        SensorDTO crashedSensorDTO = sensorMapper.toSensorDTO(savedSensor);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSensor);
     }
 
@@ -84,10 +78,8 @@ public class SensorRestController {
      * @return Обновленный сенсор
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Sensor> updateSensor(@PathVariable("id") Long id, @Valid @RequestBody Sensor sensor) {
-//        Sensor sensor = sensorMapper.fromSensorDTO(sensorDTO);
+    public ResponseEntity<Sensor> updateSensor(@PathVariable("id") Long id, @RequestBody Sensor sensor) {
         Sensor updatedSensor = sensorService.updateSensor(id, sensor);
-//        SensorDTO updatedSensorDTO = sensorMapper.toSensorDTO(updatedSensor);
         return ResponseEntity.ok(updatedSensor);
     }
 

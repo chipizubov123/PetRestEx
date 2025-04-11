@@ -1,6 +1,5 @@
 package ru.Petr.PetRestEx.controller;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +68,7 @@ public class WorkshopRestController {
      * @return Обновленная мастерская
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Workshop> updateWorkshop(@PathVariable("id") Long id, @Valid @RequestBody Workshop workshop) {
+    public ResponseEntity<Workshop> updateWorkshop(@PathVariable("id") Long id, @RequestBody Workshop workshop) {
 
         Optional<Workshop> updatedWorkshop = workshopService.updateWorkshop(id, workshop);
 

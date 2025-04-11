@@ -26,7 +26,7 @@
 
     <p>
         Workshop:<br/>
-        <select name="selected" multiple size="5">
+        <select name="selected" multiple size="10">
             <option disabled>Workshop:</option>
             <option th:each="workshop : ${workshops}" th:value="${workshop.id}" th:text="${workshop.id}"></option>
         </select>

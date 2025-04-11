@@ -1,5 +1,6 @@
 package ru.Petr.PetRestEx.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class WorkshopService {
 
     private final WorkshopRepository workshopRepository;
@@ -41,6 +43,7 @@ public class WorkshopService {
         return (List<Workshop>) workshopRepository.findAll();
     }
 
+    @Transactional
     public void deleteWorkshop(Long id) {
         workshopRepository.deleteById(id);
     }
