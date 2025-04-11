@@ -30,11 +30,7 @@ public class SensorRestController {
 
     }
 
-    /**
-     * Получение списка всех сенсоров
-     *
-     * @return Список сенсоров
-     */
+
     @GetMapping
     public ResponseEntity<List<Sensor>> getAllSensors() {
         List<Sensor> sensors = sensorService.getAllSensors();
@@ -42,12 +38,7 @@ public class SensorRestController {
         return ResponseEntity.ok(sensors);
     }
 
-    /**
-     * Получение сенсора по его идентификатору
-     *
-     * @param id Идентификатор сенсора
-     * @return Сенсор с указанным идентификатором
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Sensor> getSensorById(@PathVariable("id") Long id) {
         Sensor sensor = sensorService.getSensorById(id);
@@ -58,37 +49,21 @@ public class SensorRestController {
         return ResponseEntity.ok(sensor);
     }
 
-    /**
-     * Создание нового сенсора
-     *
-     * @param sensor Новый сенсор
-     * @return Созданный сенсор
-     */
+
     @PostMapping
     public ResponseEntity<Sensor> createSensor(@Valid @RequestBody Sensor sensor) {
         Sensor savedSensor = sensorService.createSensor(sensor);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSensor);
     }
 
-    /**
-     * Обновление сенсора
-     *
-     * @param id      Идентификатор сенсора
-     * @param sensor  Обновляемые данные сенсора
-     * @return Обновленный сенсор
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Sensor> updateSensor(@PathVariable("id") Long id, @RequestBody Sensor sensor) {
         Sensor updatedSensor = sensorService.updateSensor(id, sensor);
         return ResponseEntity.ok(updatedSensor);
     }
 
-    /**
-     * Удаление сенсора по его идентификатору
-     *
-     * @param id Идентификатор сенсора
-     * @return Статус успешного удаления
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSensor(@PathVariable("id") Long id) {
         sensorService.deleteSensor(id);

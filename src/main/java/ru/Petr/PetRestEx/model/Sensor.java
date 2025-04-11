@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity(name = "sensor")
-//@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

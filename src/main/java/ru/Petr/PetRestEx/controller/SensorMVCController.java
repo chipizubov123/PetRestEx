@@ -76,7 +76,6 @@ public class SensorMVCController {
             return "sensors/create-sensor";
         }
 
-        // Создаем сенсор
         sensorService.createSensor(sensor);
         return "redirect:/sensors";
     }
